@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black grid place-content-center w-full h-screen">
+    <form id="mobileInformation" class="bg-white px-5 py-10 rounded-lg shadow-[0_35px_60px_-15px_rgba(255,255,255,0.3)] flex flex-col items-center justify-center gap-2">
+        <h1 class="uppercase text-center font-semibold text-4xl">Informacion del mobil:</h1>
+        <div class="flex flex-col gap-1 ">
+            <p>Ingrese numero de Celular:</p>
+            <input class="px-4 py-2 outline-none border-2 border-gray-400" placeholder="Ingrese numero de telefono:" type="text" id="telefono">
+        </div>
+        
+        <div class="flex flex-col gap-1 ">
+            <p>Ingrese numero de serie:</p>
+            <input class="px-4 py-2 outline-none border-2 border-gray-400" placeholder="Ingrese numero de serie:" type="text" id="serialNumber">
+        </div>
+        
+        <div class="flex flex-col gap-1 ">
+            <p>Ingrese pago inicial:</p>
+            <input class="px-4 py-2 outline-none border-2 border-gray-400" placeholder="Ejm: 500" type="text" id="initialPayment">
+        </div>
+
+        <div class="flex flex-col gap-1 ">
+            <p>Ingrese numero imei:</p>
+            <input class="px-4 py-2 outline-none border-2 border-gray-400" placeholder="Ingrese numero de imei:" type="text" id="imei">
+        </div>
+
+        <div class="flex flex-col gap-1 ">
+            <p>Ingresar autorizacion:</p>
+            <div class="flex flex-row items-center justify-center gap-2">
+                <input class="w-[35px] h-[35px]" placeholder="Ingrese numero de telefono:" type="checkbox" id="authorice"> <span>Marca el checkbox para continuar.</span>
+            </div>
+        </div>
+
+        <input type="submit" value="Send" class="px-10 py-2 bg-blue-400 w-auto h-auto text-white rounded-lg hover:cursor-pointer hover:bg-white hover:text-blue-400 border border-blue-400 transition-colors ease-in-out duration-300">
+    </form>
+</body>
+<script src="./app.js"></script>
+</html>

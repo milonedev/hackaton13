@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mobileInformation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black w-full h-screen grid place-content-center gap-10">
+    <h1 class="text-4xl uppercase font-semibold text-white">Lista de Telefonos en reparacion:</h1>
+    <div class="w-full min-w-[550px] h-auto py-10 px-5 bg-white flex-col rounded-lg flex flex-col gap-2">
+        <div class="w-full rounded-lg bg-[#f2f2f2] h-auto py-2 px-5 w-full flex flex-row justify-between">
+            <span>Nro de Telefono </span>
+            <span>Nro de Serie</span>
+            <span>Estado</span>
+            <span>Nro de Repuestos</span>
+            <span>IMET</span>
+        </div>
+
+        <ul id="list-phones">
+            <!-- <div class="w-full rounded-lg bg-[#f2f2f2] h-auto py-2 px-5 w-full flex flex-row justify-between">
+                <span>987987987 </span>
+                <span>ABDF</span>
+                <span class="px-4 py-1 rounded-full bg-orange-600 text-white">Pendiente</span>
+                <span>3</span>
+                <span>ABCD</span>
+            </div> -->
+        </ul>
+
+    </div>
+</body>
+<script>
+    class GestionReparaciones {
+        constructor() {
+            this.telefonos = JSON.parse(localStorage.getItem("telefonos")) || [];
+        }
+
+        agregarTelefono(telefono) {
+            if (this.esTelefonoValido(telefono)) {
+                this.telefonos.push(telefono);
+                this.guardarEnLocalStorage();
+                return true;
+            }
+            return false;
+        }
+
+        esTelefonoValido({ serialNumber, imei }) {
+            return !this.telefonos.some(t => t.serialNumber === serialNumber || t.imei === imei);
+        }
+
+        guardarEnLocalStorage() {
+            localStorage.setItem("telefonos", JSON.stringify(this.telefonos));
+        }
+
+        obtenerTelefonos() {
+            return this.telefonos;
+        }
+    }
+    const gestionReparacion = new GestionReparaciones();
+    const listPhone = document.getElementById('list-phones');
+
+    const updateListTelephones = () => {
+        // listPhone.innerHTML = "";
+        const phones = gestionReparacion.obtenerTelefonos()
+
+        console.log(phones)
+        phones.forEach((phone, index) => {
+            const div = document.createElement("div");
+
+            div.classList = 'w-full rounded-lg bg-[#f2f2f2] h-auto py-2 px-5 w-full flex flex-row justify-between';
+            
+            div.innerHTML = `
+                <span class="w-full text-center">${phone.serialNumber}</span>
+                <span class="w-full text-center">${phone.imei}</span>
+                <span class="px-4 py-1 rounded-full ${phone.estado === 'Pendiente' ? 'bg-orange-600' : 'bg-green-600' } text-white">${phone.estado}</span>
+                <span class="w-full text-center">${phone.repuestos.length}</span>
+                <span class="w-full text-center">${phone.imei}</span>
+            `;
+            listPhone.appendChild(div)
+        })
+    }
+
+    updateListTelephones()
+
+</script>
+
+</html>
